@@ -126,7 +126,7 @@ This will install all of the required packages we selected within the `requireme
 
   - Casting Assistant
 
-    - mail: assitant_user@mail.com , pass: assistantpass_123
+    - mail: assistant_user@mail.com , pass: assistantpass_123
     - Permissions:
       - Can view actors and movies
 
@@ -152,10 +152,11 @@ GET /actors
 {
   "actors": [
     {
-      "age": 20,
-      "gender": "male",
-      "name": "actor_01"
-    }
+      "age": <actor_age>,
+      "gender": "<actor_gender",
+      "name": "<actor_name>"
+    },
+    etc...
   ],
   "success": true
 }
@@ -169,9 +170,9 @@ It receives a new actor data to be added in JSON format that looks like this:
 
 ```json
 {
-	"name": "<actor_name>",
-	"age": <actor_age>,
-    "gender": "<actor_gender>"
+  "name": "<actor_name>",
+  "age": <actor_age>,
+  "gender": "<actor_gender>"
 }
 ```
 
@@ -180,9 +181,9 @@ It should return response that looks like this:
 ```json
 {
     "actor": {
-       "name": "<actor_name>",
-	    "age": <actor_age>,
-        "gender": "<actor_gender>"
+      "name": "<actor_name>",
+      "age": <actor_age>,
+      "gender": "<actor_gender>"
     },
     "success": true
 }
@@ -205,9 +206,9 @@ It should return response that looks like this:
 ```json
 {
     "actor": {
-       "name": "<new_name>",
-	    "age": <actor_age>,
-        "gender": "<actor_gender>"
+      "name": "<new_name>",
+      "age": <actor_age>,
+      "gender": "<actor_gender>"
     },
     "success": true
 }
@@ -234,7 +235,8 @@ GET /movies
     {
       "release_date": "<release_date>",
       "title": "<movie_title>"
-    }
+    },
+    etc...
   ],
   "success": true
 }
