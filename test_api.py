@@ -1,15 +1,10 @@
 
+from database.models import setup_db, Actor, Movie
 import os
 import unittest
 import json
 from flask_sqlalchemy import SQLAlchemy
-
 from api import app
-
-from dotenv import load_dotenv
-load_dotenv()
-
-from database.models import setup_db, Actor, Movie
 
 
 class AgencyTestCase(unittest.TestCase):
@@ -63,7 +58,9 @@ class AgencyTestCase(unittest.TestCase):
         self.assertNotEqual(data['actors'], None)
 
     def test_add_actor(self):
-        res = self.client().post('/actors', headers=self.producer_token, json=self.new_actor)
+        res = self.client().post('/actors',
+                                 headers=self.producer_token,
+                                 json=self.new_actor)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 201)
@@ -71,16 +68,19 @@ class AgencyTestCase(unittest.TestCase):
         self.assertNotEqual(data['actor'], None)
 
     def test_add_actor_duplicate(self):
-        res = self.client().post('/actors', headers=self.producer_token, json=self.new_actor)
+        res = self.client().post('/actors',
+                                 headers=self.producer_token,
+                                 json=self.new_actor)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 422)
         self.assertEqual(data['success'], False)
 
     def test_edit_actor(self):
-        res = self.client().patch('/actors/1', headers=self.producer_token, json={
-            "name": "actor_01_edited"
-        })
+        res = self.client().patch('/actors/1',
+                                  headers=self.producer_token, json={
+                                      "name": "actor_01_edited"
+                                  })
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -88,9 +88,11 @@ class AgencyTestCase(unittest.TestCase):
         self.assertNotEqual(data['actor'], None)
 
     def test_edit_actor_not_exist(self):
-        res = self.client().patch('/actors/1000', headers=self.producer_token, json={
-            "name": "new_actor_edited"
-        })
+        res = self.client().patch('/actors/1000',
+                                  headers=self.producer_token,
+                                  json={
+                                      "name": "new_actor_edited"
+                                  })
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)
@@ -120,10 +122,12 @@ class AgencyTestCase(unittest.TestCase):
 
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
-        self.assertNotEqual(data['movies'],None)
+        self.assertNotEqual(data['movies'], None)
 
     def test_add_movie(self):
-        res = self.client().post('/movies', headers=self.producer_token, json=self.new_movie)
+        res = self.client().post('/movies',
+                                 headers=self.producer_token,
+                                 json=self.new_movie)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 201)
@@ -131,16 +135,20 @@ class AgencyTestCase(unittest.TestCase):
         self.assertNotEqual(data['movie'], None)
 
     def test_add_movies_duplicate(self):
-        res = self.client().post('/movies', headers=self.producer_token, json=self.new_movie)
+        res = self.client().post('/movies',
+                                 headers=self.producer_token,
+                                 json=self.new_movie)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 422)
         self.assertEqual(data['success'], False)
 
     def test_edit_movie(self):
-        res = self.client().patch('/movies/1', headers=self.producer_token, json={
-            "title": "movie_01_edited"
-        })
+        res = self.client().patch('/movies/1',
+                                  headers=self.producer_token,
+                                  json={
+                                      "title": "movie_01_edited"
+                                  })
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -148,9 +156,11 @@ class AgencyTestCase(unittest.TestCase):
         self.assertNotEqual(data['movie'], None)
 
     def test_edit_movie_not_exist(self):
-        res = self.client().patch('/movies/1000', headers=self.producer_token, json={
-            "title": "edited_title"
-        })
+        res = self.client().patch('/movies/1000',
+                                  headers=self.producer_token,
+                                  json={
+                                      "title": "edited_title"
+                                  })
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)
@@ -180,14 +190,15 @@ class AgencyTestCase(unittest.TestCase):
 
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
-    
+
     def test_deny_permision_assistant(self):
-        res = self.client().post('/actors', headers=self.assistant_token, json=self.new_actor)
+        res = self.client().post('/actors',
+                                 headers=self.assistant_token,
+                                 json=self.new_actor)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 403)
         self.assertEqual(data['success'], False)
-
 
     def test_allow_permision_director(self):
         res = self.client().get('/movies', headers=self.director_token)
