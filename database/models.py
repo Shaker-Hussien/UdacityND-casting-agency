@@ -26,7 +26,6 @@ def setup_db(app, database_path=database_connection):
 db_drop_and_create_all()
     drops the database tables and starts fresh
     can be used to initialize a clean database
-    !!NOTE you can change the database_filename variable to have multiple verisons of a database
 '''
 
 
@@ -35,7 +34,27 @@ def db_drop_and_create_all():
     db.create_all()
 
 
-class Actor(db.Model):
+'''
+Extend the base Model class to add common methods
+'''
+
+
+class DatabaseOperations(db.Model):
+    __abstract__ = True
+
+    def insert(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
+    def update(self):
+        db.session.commit()
+
+
+class Actor(DatabaseOperations):
     __tablename__ = 'actors'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
@@ -47,23 +66,11 @@ class Actor(db.Model):
         self.age = age
         self.gender = gender
 
-    def insert(self):
-        db.session.add(self)
-        db.session.commit()
-        return self.format()
-
-    def update(self):
-        db.session.commit()
-
-    def delete(self):
-        db.session.delete(self)
-        db.session.commit()
-
     def format(self):
         return {"name": self.name, "age": self.age, "gender": self.gender}
 
 
-class Movie(db.Model):
+class Movie(DatabaseOperations):
     __tablename__ = 'movies'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(80))
@@ -72,18 +79,6 @@ class Movie(db.Model):
     def __init__(self, title, release_date):
         self.title = title
         self.release_date = release_date
-
-    def insert(self):
-        db.session.add(self)
-        db.session.commit()
-        return self.format()
-
-    def update(self):
-        db.session.commit()
-
-    def delete(self):
-        db.session.delete(self)
-        db.session.commit()
 
     def format(self):
         return {"title": self.title, "release_date": self.release_date}
