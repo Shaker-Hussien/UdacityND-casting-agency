@@ -4,6 +4,15 @@
 
 The Casting Agency models a company that is responsible for creating movies and managing and assigning actors to those movies. You are an Executive Producer within the company and are creating a system to simplify and streamline your process.
 
+### Motivation
+
+The Casting Agency Project will allow me to apply many concepts and techniques essential for any **Full-Stack Enginner** like:
+- Applying Database Modeling and Migration concepts.
+- Applying REST APIs principles.
+- Applying Authentication/Authorization and Users/Roles Concepts.
+- Applying Cloud Deployment on Heroku.
+- using Postman for documentation and testing.
+
 ## Getting Started
 
 ### Tech Stack
