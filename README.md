@@ -7,6 +7,7 @@ The Casting Agency models a company that is responsible for creating movies and 
 ### Motivation
 
 The Casting Agency Project will allow me to apply many concepts and techniques essential for any **Full-Stack Enginner** like:
+
 - Applying Database Modeling and Migration concepts.
 - Applying REST APIs principles.
 - Applying Authentication/Authorization and Users/Roles Concepts.
@@ -129,7 +130,7 @@ This will install all of the required packages we selected within the `requireme
 
 - Name : CastingAgency
 - Domain : dev-shaker.auth0.com
-- Login : [link](https://dev-shaker.auth0.com/authorize?audience=agency&response_type=token&client_id=77FxF5HjVct5MB14659YeW58NlmuE56t&redirect_uri=https://casting-agency-shaker.herokuapp.com/login-result)
+- Login : [link](https://dev-shaker.auth0.com/authorize?audience=agency&response_type=token&client_id=77FxF5HjVct5MB14659YeW58NlmuE56t&redirect_uri=https://casting-agency-shaker.herokuapp.com/)
 
 - Users & Roles
 
