@@ -1,6 +1,5 @@
 from flask import Flask, request, jsonify, abort
 from database.models import Actor
-
 from auth.auth import requires_auth
 from api import app
 
@@ -31,7 +30,10 @@ def add_actor(token):
         abort(400)
 
     existing_actor = Actor.query.filter(
-        Actor.name == actor_name, Actor.age == actor_age, Actor.gender == actor_gender).one_or_none()
+        Actor.name == actor_name,
+        Actor.age == actor_age,
+        Actor.gender == actor_gender).one_or_none()
+
     if existing_actor:
         abort(422)
 

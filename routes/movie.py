@@ -29,7 +29,9 @@ def add_movie(token):
         abort(400)
 
     existing_movie = Movie.query.filter(
-        Movie.title == movie_title, Movie.release_date == movie_release_date).one_or_none()
+        Movie.title == movie_title,
+        Movie.release_date == movie_release_date).one_or_none()
+
     if existing_movie:
         abort(422)
 
@@ -64,7 +66,8 @@ def edit_movie(token, movie_id):
         if updated_title and movie_data.title != updated_title:
             movie_data.title = updated_title
 
-        if updated_release_date and movie_data.release_date != updated_release_date:
+        if updated_release_date and \
+                movie_data.release_date != updated_release_date:
             movie_data.release_date = updated_release_date
 
         movie_data.update()
