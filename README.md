@@ -37,7 +37,7 @@ Our tech stack will include:
 
 ### Main Files: Project Structure
 
-```sh
+```
 ├── README.md
 ├── requirements.txt *** The dependencies we need to install
 ├── api.py *** the main driver of the app.
